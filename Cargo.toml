@@ -10,6 +10,9 @@ repository = "https://github.com/Buzzec/cycler"
 readme = "README.md"
 categories = ["data-structures"]
 keywords = ["multithread"]
+exclude = [
+    ".idea/*"
+]
 
 [dependencies]
 parking_lot = { version = "0.11.1", features = ["send_guard"] }
