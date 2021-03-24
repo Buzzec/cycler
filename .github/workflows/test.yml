@@ -35,7 +35,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --no-deafult-features --featrues ${{ matrix.features }}
+          args: --no-default-features --featrues ${{ matrix.features }}
 
   test-nightly:
     name: Miri Test
@@ -63,4 +63,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: miri
-          args: test --no-deafult-features --features ${{ matrix.features }}
+          args: test --no-default-features --features ${{ matrix.features }}

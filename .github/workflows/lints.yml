@@ -36,10 +36,10 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --all -- --check --no-deafult-features --features ${{ matrix.features }}
+          args: --all -- --check --no-default-features --features ${{ matrix.features }}
 
       - name: Run cargo clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: -- -D warnings --no-deafult-features --features ${{ matrix.features }}
+          args: -- -D warnings --no-default-features --features ${{ matrix.features }}
