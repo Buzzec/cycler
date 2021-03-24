@@ -18,5 +18,7 @@ exclude = [
 parking_lot = { version = "0.11.1", features = ["send_guard"] }
 
 [features]
-default = []
+default = ["unsafe_cleanup"]
+# This feature allows cleaning of data with unsafe code.
+# Without this memory leaks will exist when a RwLockCycler is dropped, but there will be no unsafe code.
 unsafe_cleanup = []
