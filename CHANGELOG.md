@@ -1,3 +1,8 @@
+## cycler v0.1.3
+- Added github actions to verify with clippy and miri
+- Added github actions to run tests
+- Ran rustfmt on the whole repo and added rustfmt.toml
+
 ## cycler v0.1.2
 - Fixed use after free bug present when `unsafe_cleanup` is enabled
   - This was due to drop ordering being incorrect in `RwLockCyclerWriter` and`RwLockCyclerReader`
