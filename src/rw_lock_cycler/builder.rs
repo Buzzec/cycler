@@ -23,14 +23,14 @@ pub fn build_single_reader<T>(values: [T; 3]) -> (RwLockCyclerWriter<T>, RwLockC
             #[cfg(feature = "unsafe_cleanup")]
             ref_holder: ref_holder.clone(),
             cycler,
-            writer: cycler.data_slots[0].write(),
-            currently_writing: 0,
+            writer: cycler.data_slots[1].write(),
+            currently_writing: 1,
         },
         RwLockCyclerReader {
             #[cfg(feature = "unsafe_cleanup")]
             ref_holder,
             cycler,
-            reader: Some(cycler.data_slots[1].read()),
+            reader: Some(cycler.data_slots[0].read()),
         }
     )
 }
