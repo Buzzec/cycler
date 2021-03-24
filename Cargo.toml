@@ -3,6 +3,13 @@ name = "cycler"
 version = "0.1.0"
 authors = ["buzzec <buzzec@buzzec.net"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+description = "A simultainious write/read data structure"
+homepage = "https://github.com/Buzzec/cycler"
+repository = "https://github.com/Buzzec/cycler"
+readme = "README.md"
+categories = ["data-structures"]
+keywords = ["multithread"]
 
 [dependencies]
 parking_lot = { version = "0.11.1", features = ["send_guard"] }
