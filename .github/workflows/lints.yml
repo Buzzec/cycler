@@ -17,6 +17,9 @@ jobs:
         rust:
           - stable
           - nightly
+        features:
+          - ""
+          - unsafe_cleanup
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -33,10 +36,10 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --all -- --check
+          args: --all -- --check --no-deafult-features --features ${{ matrix.features }}
 
       - name: Run cargo clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: -- -D warnings
+          args: -- -D warnings --no-deafult-features --features ${{ matrix.features }}

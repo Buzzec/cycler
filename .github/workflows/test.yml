@@ -17,6 +17,9 @@ jobs:
         rust:
           - stable
           - nightly
+        features:
+          - ""
+          - unsafe_cleanup
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -32,10 +35,17 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
+          args: --no-deafult-features --featrues ${{ matrix.features }}
 
   test-nightly:
     name: Miri Test
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        features:
+          - ""
+          - unsafe_cleanup
 
     steps:
       - name: Checkout sources
@@ -49,13 +59,8 @@ jobs:
           override: true
           components: miri
 
-#      - name: Install miri
-#        uses: actions-rs/cargo@v1
-#        with:
-#          command: install miri
-
       - name: Run miri test
         uses: actions-rs/cargo@v1
         with:
           command: miri
-          args: test
+          args: test --no-deafult-features --features ${{ matrix.features }}
