@@ -10,12 +10,12 @@ use std::sync::Arc;
 /// The writer to a data distributor
 #[derive(Debug)]
 pub struct RwLockCyclerWriter<T> where T: 'static {
-    #[allow(dead_code)]
-    #[cfg(feature = "unsafe_cleanup")]
-    pub(super) ref_holder: Arc<StaticRefHolder<RwLockCycler<T>>>,
     pub(super) cycler: &'static RwLockCycler<T>,
     pub(super) writer: RwLockWriteGuard<'static, T>,
     pub(super) currently_writing: u8,
+    #[allow(dead_code)]
+    #[cfg(feature = "unsafe_cleanup")]
+    pub(super) ref_holder: Arc<StaticRefHolder<RwLockCycler<T>>>,
 }
 impl<T> EnsureSend for RwLockCyclerWriter<T> where T: Send + Sync {}
 impl<T> EnsureSync for RwLockCyclerWriter<T> where T: Send + Sync {}

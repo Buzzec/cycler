@@ -13,11 +13,11 @@ use std::sync::Arc;
 /// The reader for a data distributor
 #[derive(Debug)]
 pub struct RwLockCyclerReader<T> where T: 'static {
+    pub(super) cycler: &'static RwLockCycler<T>,
+    pub(super) reader: Option<RwLockReadGuard<'static, T>>,
     #[allow(dead_code)]
     #[cfg(feature = "unsafe_cleanup")]
     pub(super) ref_holder: Arc<StaticRefHolder<RwLockCycler<T>>>,
-    pub(super) cycler: &'static RwLockCycler<T>,
-    pub(super) reader: Option<RwLockReadGuard<'static, T>>,
 }
 impl<T> EnsureSend for RwLockCyclerReader<T> where T: Send + Sync {}
 impl<T> EnsureSync for RwLockCyclerReader<T> where T: Send + Sync {}
