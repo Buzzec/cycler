@@ -6,7 +6,7 @@ use std::sync::atomic::AtomicU8;
 
 use parking_lot::RwLock;
 
-pub use builder::{build_single_reader, build_multiple_reader};
+pub use builder::{build_multiple_reader, build_single_reader};
 pub use reader::RwLockCyclerReader;
 pub use writer::RwLockCyclerWriter;
 
@@ -21,8 +21,8 @@ struct RwLockCycler<T> {
     data_slots: Box<[RwLock<T>]>,
     most_up_to_date: AtomicU8,
 }
-impl<T> RwLockCycler<T>{
-    fn num_readers(&self) -> usize{
+impl<T> RwLockCycler<T> {
+    fn num_readers(&self) -> usize {
         self.data_slots.len() - 2
     }
 }
@@ -33,20 +33,17 @@ impl<T> EnsureSync for RwLockCycler<T> where T: Send + Sync {}
 mod test {
     use crate::rw_lock_cycler::build_single_reader;
     use crate::test::TestData;
+    use crate::traits::{CyclerReader, CyclerWriterDefault, ReadAccess, WriteAccess};
     use std::sync::atomic::Ordering;
-    use crate::traits::{WriteAccess, ReadAccess, CyclerWriterDefault, CyclerReader};
     #[test]
     fn default_test() {
-        let (mut writer, mut reader) = build_single_reader([TestData::default(), TestData::default(), TestData::default()]);
+        let (mut writer, mut reader) =
+            build_single_reader([TestData::default(), TestData::default(), TestData::default()]);
         assert_eq!(writer.currently_writing, 1);
         assert_eq!(writer.cycler.data_slots.len(), 3);
         assert_eq!(writer.cycler.num_readers(), 1);
         assert_eq!(writer.cycler.most_up_to_date.load(Ordering::SeqCst), 0);
-        let new_data = TestData {
-            test1: 100,
-            test2: "Test2".to_string(),
-            test3: Box::new(1002),
-        };
+        let new_data = TestData { test1: 100, test2: "Test2".to_string(), test3: Box::new(1002) };
         writer.write_data_mut().clone_from(&new_data);
         assert_eq!(*reader.read_data(), TestData::default());
         writer.write_next();

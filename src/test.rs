@@ -10,11 +10,7 @@ pub(crate) struct TestData {
 }
 impl Default for TestData {
     fn default() -> Self {
-        Self {
-            test1: 0,
-            test2: "Start".to_string(),
-            test3: Box::new(100),
-        }
+        Self { test1: 0, test2: "Start".to_string(), test3: Box::new(100) }
     }
 }
 impl ReadAccess for TestData {
@@ -35,5 +31,3 @@ impl WriteAccess for TestData {
         self
     }
 }
-
-

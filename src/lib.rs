@@ -22,15 +22,15 @@
 #[macro_use]
 mod macros;
 
-pub mod traits;
 pub mod rw_lock_cycler;
+pub mod traits;
 
-#[cfg(test)]
-mod test;
 #[cfg(feature = "unsafe_cleanup")]
 mod static_ref_holder;
+#[cfg(test)]
+mod test;
 
-use crate::rw_lock_cycler::{RwLockCyclerWriter, RwLockCyclerReader};
+use crate::rw_lock_cycler::{RwLockCyclerReader, RwLockCyclerWriter};
 
 /// This is the currently most optimal cycler writer that implements `UniversalCyclerWriter`.
 pub type DefaultCyclerWriter<T> = RwLockCyclerWriter<T>;
@@ -38,11 +38,15 @@ pub type DefaultCyclerWriter<T> = RwLockCyclerWriter<T>;
 pub type DefaultCyclerReader<T> = RwLockCyclerReader<T>;
 
 /// Creates a single reader RwLockCycler using `values` as the initial values for the slots.
-pub fn build_single_reader<T>(initial_values: [T; 3]) -> (DefaultCyclerWriter<T>, DefaultCyclerReader<T>){
+pub fn build_single_reader<T>(
+    initial_values: [T; 3],
+) -> (DefaultCyclerWriter<T>, DefaultCyclerReader<T>) {
     rw_lock_cycler::build_single_reader(initial_values)
 }
 
 /// Creates a multi reader DefaultCycler, the amount of readers being `initial_values.len() - 2`.
-pub fn build_multiple_reader<T>(initial_values: Vec<T>) -> (DefaultCyclerWriter<T>, Vec<DefaultCyclerReader<T>>){
+pub fn build_multiple_reader<T>(
+    initial_values: Vec<T>,
+) -> (DefaultCyclerWriter<T>, Vec<DefaultCyclerReader<T>>) {
     rw_lock_cycler::build_multiple_reader(initial_values)
 }

@@ -1,6 +1,6 @@
 use crate::rw_lock_cycler::RwLockCycler;
-use parking_lot::RwLockWriteGuard;
 use crate::traits::*;
+use parking_lot::RwLockWriteGuard;
 
 #[cfg(feature = "unsafe_cleanup")]
 use crate::static_ref_holder::StaticRefHolder;
@@ -9,7 +9,10 @@ use std::sync::Arc;
 
 /// The writer to a data distributor
 #[derive(Debug)]
-pub struct RwLockCyclerWriter<T> where T: 'static {
+pub struct RwLockCyclerWriter<T>
+where
+    T: 'static,
+{
     pub(super) cycler: &'static RwLockCycler<T>,
     pub(super) writer: RwLockWriteGuard<'static, T>,
     pub(super) currently_writing: u8,
@@ -51,9 +54,11 @@ impl<T> RwLockCyclerWriter<T> {
     //     write_next_boxed_clone_fn,
     //     Box<dyn FnOnce(&mut T, &T)>
     // }
-
 }
-impl<T> ReadAccess for RwLockCyclerWriter<T> where T: ReadAccess {
+impl<T> ReadAccess for RwLockCyclerWriter<T>
+where
+    T: ReadAccess,
+{
     type Read = T::Read;
 
     /// Gets a shared reference to the read data of the current block
@@ -62,7 +67,10 @@ impl<T> ReadAccess for RwLockCyclerWriter<T> where T: ReadAccess {
         self.writer.read_data()
     }
 }
-impl<T> WriteAccess for RwLockCyclerWriter<T> where T: WriteAccess {
+impl<T> WriteAccess for RwLockCyclerWriter<T>
+where
+    T: WriteAccess,
+{
     type Write = T::Write;
 
     /// Gets a shared reference to the write data of the current block
@@ -77,13 +85,19 @@ impl<T> WriteAccess for RwLockCyclerWriter<T> where T: WriteAccess {
         self.writer.write_data_mut()
     }
 }
-impl<T> CyclerWriter<T> for RwLockCyclerWriter<T> where T: WriteAccess{}
-impl<T> CyclerWriterFn<T> for RwLockCyclerWriter<T> where T: WriteAccess{
+impl<T> CyclerWriter<T> for RwLockCyclerWriter<T> where T: WriteAccess {}
+impl<T> CyclerWriterFn<T> for RwLockCyclerWriter<T>
+where
+    T: WriteAccess,
+{
     fn write_next_fn(&mut self, clone_fn: fn(&mut T, &T)) {
         rw_cycler_fn!(self, clone_fn);
     }
 
-    fn write_next_fn_impl(&mut self, clone_fn: impl FnOnce(&mut T, &T)) where Self: Sized {
+    fn write_next_fn_impl(&mut self, clone_fn: impl FnOnce(&mut T, &T))
+    where
+        Self: Sized,
+    {
         rw_cycler_fn!(self, clone_fn);
     }
 
@@ -95,12 +109,18 @@ impl<T> CyclerWriterFn<T> for RwLockCyclerWriter<T> where T: WriteAccess{
         rw_cycler_fn!(self, clone_fn);
     }
 }
-impl<T> CyclerWriterMutFn<T> for RwLockCyclerWriter<T> where T: WriteAccess{
+impl<T> CyclerWriterMutFn<T> for RwLockCyclerWriter<T>
+where
+    T: WriteAccess,
+{
     fn write_next_mut_fn(&mut self, clone_fn: fn(&mut T, &mut T)) {
         rw_cycler_mut_fn!(self, clone_fn);
     }
 
-    fn write_next_mut_fn_impl(&mut self, clone_fn: impl FnOnce(&mut T, &mut T)) where Self: Sized {
+    fn write_next_mut_fn_impl(&mut self, clone_fn: impl FnOnce(&mut T, &mut T))
+    where
+        Self: Sized,
+    {
         rw_cycler_mut_fn!(self, clone_fn);
     }
 
@@ -112,7 +132,10 @@ impl<T> CyclerWriterMutFn<T> for RwLockCyclerWriter<T> where T: WriteAccess{
         rw_cycler_mut_fn!(self, clone_fn);
     }
 }
-impl<T> CyclerWriterDefault<T> for RwLockCyclerWriter<T> where T: Clone + WriteAccess{
+impl<T> CyclerWriterDefault<T> for RwLockCyclerWriter<T>
+where
+    T: Clone + WriteAccess,
+{
     fn write_next(&mut self) {
         self.write_next_fn(T::clone_from)
     }

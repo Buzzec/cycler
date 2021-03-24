@@ -1,8 +1,8 @@
 use std::sync::atomic::Ordering;
 
 use crate::rw_lock_cycler::RwLockCycler;
-use parking_lot::{RwLockReadGuard, RwLock};
-use crate::traits::{EnsureSend, EnsureSync, ReadAccess, CyclerReader};
+use crate::traits::{CyclerReader, EnsureSend, EnsureSync, ReadAccess};
+use parking_lot::{RwLock, RwLockReadGuard};
 use std::mem::swap;
 
 #[cfg(feature = "unsafe_cleanup")]
@@ -12,7 +12,10 @@ use std::sync::Arc;
 
 /// The reader for a data distributor
 #[derive(Debug)]
-pub struct RwLockCyclerReader<T> where T: 'static {
+pub struct RwLockCyclerReader<T>
+where
+    T: 'static,
+{
     pub(super) cycler: &'static RwLockCycler<T>,
     pub(super) reader: Option<RwLockReadGuard<'static, T>>,
     #[allow(dead_code)]
@@ -29,7 +32,10 @@ impl<T> RwLockCyclerReader<T> {
     //
     // }
 }
-impl<T> ReadAccess for RwLockCyclerReader<T> where T: ReadAccess {
+impl<T> ReadAccess for RwLockCyclerReader<T>
+where
+    T: ReadAccess,
+{
     type Read = T::Read;
 
     #[inline]
@@ -38,14 +44,19 @@ impl<T> ReadAccess for RwLockCyclerReader<T> where T: ReadAccess {
         self.reader.as_ref().unwrap().read_data()
     }
 }
-impl<T> CyclerReader<T> for RwLockCyclerReader<T> where T: ReadAccess{
+impl<T> CyclerReader<T> for RwLockCyclerReader<T>
+where
+    T: ReadAccess,
+{
     fn read_latest(&mut self) {
         let mut old_reader = None;
         swap(&mut self.reader, &mut old_reader);
         drop(old_reader);
         let mut most_up_to_date = self.cycler.most_up_to_date.load(Ordering::Relaxed);
         loop {
-            if let Some(reader) = RwLock::try_read(&self.cycler.data_slots[most_up_to_date as usize]) {
+            if let Some(reader) =
+                RwLock::try_read(&self.cycler.data_slots[most_up_to_date as usize])
+            {
                 self.reader = Some(reader);
                 return;
             } else {
