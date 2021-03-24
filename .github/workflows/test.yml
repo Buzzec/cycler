@@ -57,5 +57,5 @@ jobs:
       - name: Run miri test
         uses: actions-rs/cargo@v1
         with:
-          toolchain: nightly
-          command: miri test
+          command: miri
+          args: test
