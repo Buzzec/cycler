@@ -10,13 +10,14 @@ name: test
 
 jobs:
   test-stable:
-    name: Stable Test Suite
+    name: Test Suite
     runs-on: ubuntu-latest
     strategy:
       matrix:
         rust:
           - stable
           - 1.31.0
+          - nightly
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -24,6 +25,7 @@ jobs:
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
         with:
+          profile: minimal
           toolchain: ${{ matrix.rust }}
           override: true
 
@@ -33,7 +35,7 @@ jobs:
           command: test
 
   test-nightly:
-    name: Nightly Test Suite
+    name: Miri Test
     runs-on: ubuntu-latest
 
     steps:
@@ -48,10 +50,10 @@ jobs:
           override: true
           components: miri
 
-      - name: Run cargo test nightly
+      - name: Install miri
         uses: actions-rs/cargo@v1
         with:
-          command: test
+          command: install miri
 
       - name: Run miri test
         uses: actions-rs/cargo@v1
