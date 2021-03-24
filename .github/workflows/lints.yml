@@ -19,7 +19,7 @@ jobs:
           - nightly
         features:
           - ""
-          - unsafe_cleanup
+          -  --features unsafe_cleanup
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -42,4 +42,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: -- -D warnings --no-default-features --features ${{ matrix.features }}
+          args: -- -D warnings --no-default-features ${{ matrix.features }}
