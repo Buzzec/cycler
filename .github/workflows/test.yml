@@ -44,8 +44,7 @@ jobs:
     strategy:
       matrix:
         features:
-          - ""
-          - unsafe_cleanup
+          - --features unsafe_cleanup
 
     steps:
       - name: Checkout sources
