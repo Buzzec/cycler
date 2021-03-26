@@ -1,5 +1,5 @@
-## cycler v0.1.4
-- Removed commented out code.
+## cycler v0.2.0
+- Removed commented out code
 
 ## cycler v0.1.3
 - Added github actions to verify with clippy and miri
