@@ -24,14 +24,6 @@ where
 }
 impl<T> EnsureSend for RwLockCyclerReader<T> where T: Send + Sync {}
 impl<T> EnsureSync for RwLockCyclerReader<T> where T: Send + Sync {}
-impl<T> RwLockCyclerReader<T> {
-    // /// This changes the reader to read the most up to date version of the data available.
-    // /// This may be the same data as the last read or new data.
-    // /// This function takes an owned self to ensure nothing is still reading the current block.
-    // pub fn read_latest(mut self) -> Self {
-    //
-    // }
-}
 impl<T> ReadAccess for RwLockCyclerReader<T>
 where
     T: ReadAccess,

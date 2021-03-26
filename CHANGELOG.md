@@ -1,3 +1,6 @@
+## cycler v0.1.4
+- Removed commented out code.
+
 ## cycler v0.1.3
 - Added github actions to verify with clippy and miri
 - Added github actions to run tests
