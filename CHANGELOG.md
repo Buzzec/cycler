@@ -1,5 +1,7 @@
 ## cycler v0.3.0
 - Removed rust fmt linting
+- Added clippy release mode
+- Removed rustfmt.toml as it's no longer used
 
 ## cycler v0.2.0
 - Removed commented out code
