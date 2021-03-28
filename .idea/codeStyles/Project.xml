@@ -1,0 +1,173 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <option name="LINE_SEPARATOR" value="&#10;" />
+    <DB2CodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </DB2CodeStyleSettings>
+    <DerbyCodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </DerbyCodeStyleSettings>
+    <H2CodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </H2CodeStyleSettings>
+    <HSQLCodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </HSQLCodeStyleSettings>
+    <MSSQLCodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </MSSQLCodeStyleSettings>
+    <MySQLCodeStyleSettings version="5">
+      <option name="KEYWORD_CASE" value="2" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="TYPE_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="1" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_IDENTIFIER" value="2" />
+      <option name="QUOTE_TYPE" value="31" />
+      <option name="USE_GENERIC_STYLE" value="true" />
+    </MySQLCodeStyleSettings>
+    <Objective-C>
+      <option name="SPACE_WITHIN_TEMPLATE_DOUBLE_GT" value="false" />
+      <option name="SPACE_BEFORE_NAMESPACE_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_POINTER_IN_DECLARATION" value="false" />
+      <option name="SPACE_AFTER_POINTER_IN_DECLARATION" value="true" />
+      <option name="SPACE_BEFORE_REFERENCE_IN_DECLARATION" value="false" />
+      <option name="SPACE_AFTER_REFERENCE_IN_DECLARATION" value="true" />
+    </Objective-C>
+    <Objective-C-extensions>
+      <extensions>
+        <pair source="cpp" header="hpp" fileNamingConvention="NONE" />
+        <pair source="c" header="h" fileNamingConvention="NONE" />
+      </extensions>
+      <rules>
+        <rule entity="NAMESPACE" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
+        <rule entity="MACRO" visibility="ANY" specifier="ANY" prefix="" style="SCREAMING_SNAKE_CASE" suffix="" />
+        <rule entity="CLASS" visibility="ANY" specifier="ANY" prefix="" style="PASCAL_CASE" suffix="" />
+        <rule entity="ENUM" visibility="ANY" specifier="ANY" prefix="" style="PASCAL_CASE" suffix="" />
+        <rule entity="ENUMERATOR" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
+        <rule entity="TYPEDEF" visibility="ANY" specifier="ANY" prefix="" style="PASCAL_CASE" suffix="" />
+        <rule entity="UNION" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
+        <rule entity="CLASS_MEMBER_FUNCTION,STRUCT_MEMBER_FUNCTION" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
+        <rule entity="CLASS_MEMBER_FIELD,STRUCT_MEMBER_FIELD" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
+        <rule entity="GLOBAL_FUNCTION" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
+        <rule entity="GLOBAL_VARIABLE" visibility="ANY" specifier="ANY" prefix="" style="SCREAMING_SNAKE_CASE" suffix="" />
+        <rule entity="PARAMETER" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
+        <rule entity="LOCAL_VARIABLE" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
+      </rules>
+    </Objective-C-extensions>
+    <OracleCodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </OracleCodeStyleSettings>
+    <PostgresCodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </PostgresCodeStyleSettings>
+    <RsCodeStyleSettings>
+      <option name="ALIGN_RET_TYPE" value="false" />
+      <option name="INDENT_WHERE_CLAUSE" value="false" />
+      <option name="MIN_NUMBER_OF_BLANKS_BETWEEN_ITEMS" value="0" />
+      <option name="PRESERVE_PUNCTUATION" value="true" />
+    </RsCodeStyleSettings>
+    <SQLiteCodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </SQLiteCodeStyleSettings>
+    <SqlCodeStyleSettings version="5">
+      <option name="KEYWORD_CASE" value="2" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="TYPE_CASE" value="2" />
+      <option name="CUSTOM_TYPE_CASE" value="2" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_IDENTIFIER" value="1" />
+      <option name="QUOTE_TYPE" value="11" />
+    </SqlCodeStyleSettings>
+    <SybaseCodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
+      <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
+      <option name="QUOTED_IDENTIFIER_CASE" value="1" />
+      <option name="QUOTE_TYPE" value="31" />
+    </SybaseCodeStyleSettings>
+    <TypeScriptCodeStyleSettings version="0">
+      <option name="BLANK_LINES_AROUND_FUNCTION" value="0" />
+    </TypeScriptCodeStyleSettings>
+    <codeStyleSettings language="CMake">
+      <option name="SPACE_BEFORE_IF_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_WHILE_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_FOR_PARENTHESES" value="false" />
+    </codeStyleSettings>
+    <codeStyleSettings language="ObjectiveC">
+      <option name="RIGHT_MARGIN" value="240" />
+      <option name="BLANK_LINES_AROUND_METHOD" value="0" />
+      <option name="BLANK_LINES_AROUND_METHOD_IN_INTERFACE" value="0" />
+      <option name="ELSE_ON_NEW_LINE" value="true" />
+      <option name="WHILE_ON_NEW_LINE" value="true" />
+      <option name="CATCH_ON_NEW_LINE" value="true" />
+      <option name="SPACE_BEFORE_IF_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_WHILE_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_FOR_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_CATCH_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_SWITCH_PARENTHESES" value="false" />
+      <option name="SPACE_BEFORE_CLASS_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_METHOD_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_IF_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_ELSE_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_WHILE_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_FOR_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_DO_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_SWITCH_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_TRY_LBRACE" value="false" />
+      <option name="SPACE_BEFORE_CATCH_LBRACE" value="false" />
+    </codeStyleSettings>
+    <codeStyleSettings language="Rust">
+      <option name="RIGHT_MARGIN" value="200" />
+      <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
+      <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
+    </codeStyleSettings>
+    <codeStyleSettings language="TypeScript">
+      <option name="BLANK_LINES_AROUND_CLASS" value="0" />
+      <option name="BLANK_LINES_AROUND_METHOD" value="0" />
+      <option name="BLANK_LINES_AROUND_METHOD_IN_INTERFACE" value="0" />
+    </codeStyleSettings>
+  </code_scheme>
+</component>

@@ -1,6 +1,6 @@
 [package]
 name = "cycler"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["buzzec <buzzec@buzzec.net"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -18,10 +18,14 @@ exclude = [
 parking_lot = { version = "0.11.1", features = ["send_guard"] }
 
 [features]
-default = ["allow_unsafe", "unsafe_cleanup"]
+default = ["allow_unsafe", "unsafe_cleanup", "atomic_cycler"]
 # This feature allows the use of code that involves unsafe.
 # This can be disabled for assurance that all code is safe.
 allow_unsafe = []
 # This feature allows cleaning of data with unsafe code.
 # Without this memory leaks will exist when a RwLockCycler is dropped.
+# This leak may not matter if the cycler lives for the whole program anyway, in which case this feature should be disabled.
 unsafe_cleanup = ["allow_unsafe"]
+# This feature allows use of the AtomicCycler.
+# This relies on an usafe atomic lockless lock so requires allow_unsafe
+atomic_cycler = ["allow_unsafe"]
