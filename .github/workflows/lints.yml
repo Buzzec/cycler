@@ -40,4 +40,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: ${{ matrix.mode }}--no-default-features ${{ matrix.features }} -- -D warnings
+          args: ${{ matrix.mode }} --no-default-features ${{ matrix.features }} -- -D warnings
