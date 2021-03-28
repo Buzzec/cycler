@@ -46,7 +46,7 @@ jobs:
       matrix:
         features:
           - --features unsafe_cleanup
-          - --features atomic_cycler
+          - --features atomic_cycler,unsafe_cleanup
 
     steps:
       - name: Checkout sources
