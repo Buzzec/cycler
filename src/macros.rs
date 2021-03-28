@@ -45,6 +45,7 @@ macro_rules! rw_cycler_mut_fn {
     };
 }
 
+#[cfg(feature = "atomic_cycler")]
 macro_rules! atomic_cycler_fn {
     ($self:ident, $clone_fn:ident) => {
         use std::ops::{Deref, DerefMut};
@@ -67,6 +68,7 @@ macro_rules! atomic_cycler_fn {
     };
 }
 
+#[cfg(feature = "atomic_cycler")]
 macro_rules! atomic_cycler_mut_fn {
     ($self:ident, $clone_fn:ident) => {
         use std::ops::DerefMut;
