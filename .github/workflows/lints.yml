@@ -17,12 +17,13 @@ jobs:
         rust:
           - stable
           - nightly
-        features:
-          - ""
-          - --features unsafe_cleanup
         mode:
           - ""
           - --release
+        features:
+          - ""
+          - --features unsafe_cleanup
+
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
