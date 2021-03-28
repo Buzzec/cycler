@@ -9,8 +9,8 @@ on:
 name: Lints
 
 jobs:
-  lints:
-    name: Clippy + rustfmt
+  clippy:
+    name: Clippy
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -19,7 +19,33 @@ jobs:
           - nightly
         features:
           - ""
-          -  --features unsafe_cleanup
+          - --features unsafe_cleanup
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Install toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust }}
+          override: true
+          components: clippy
+
+      - name: Run cargo clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --no-default-features ${{ matrix.features }} -- -D warnings
+
+  rust-fmt:
+    name: rust-fmt
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - nightly
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -30,16 +56,10 @@ jobs:
           profile: minimal
           toolchain: ${{ matrix.rust }}
           override: true
-          components: rustfmt, clippy
+          components: rustfmt
 
       - name: Run cargo fmt
         uses: actions-rs/cargo@v1
         with:
           command: fmt
           args: --all -- --check
-
-      - name: Run cargo clippy
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --no-default-features ${{ matrix.features }} -- -D warnings
