@@ -15,7 +15,7 @@ pub fn build_single_reader<T>(values: [T; 3]) -> (RwLockCyclerWriter<T>, RwLockC
         most_up_to_date: AtomicU8::new(0),
     }));
     #[cfg(feature = "unsafe_cleanup")]
-    let ref_holder = Arc::new(StaticRefHolder::new(cycler));
+        let ref_holder = Arc::new(StaticRefHolder::new(cycler));
     (
         RwLockCyclerWriter {
             #[cfg(feature = "unsafe_cleanup")]
@@ -34,9 +34,7 @@ pub fn build_single_reader<T>(values: [T; 3]) -> (RwLockCyclerWriter<T>, RwLockC
 }
 
 /// Creates a multi reader RwLockCycler, the amount of readers being `initial_values.len() - 2`.
-pub fn build_multiple_reader<T>(
-    initial_values: Vec<T>,
-) -> (RwLockCyclerWriter<T>, Vec<RwLockCyclerReader<T>>) {
+pub fn build_multiple_reader<T>(initial_values: Vec<T>) -> (RwLockCyclerWriter<T>, Vec<RwLockCyclerReader<T>>) {
     #[cfg(debug_assertions)]
     assert!(initial_values.len() >= 3 && initial_values.len() <= u8::MAX as usize);
     let cycler = Box::leak(Box::new(RwLockCycler {
@@ -44,7 +42,7 @@ pub fn build_multiple_reader<T>(
         most_up_to_date: AtomicU8::new(0),
     }));
     #[cfg(feature = "unsafe_cleanup")]
-    let ref_holder = Arc::new(StaticRefHolder::new(cycler));
+        let ref_holder = Arc::new(StaticRefHolder::new(cycler));
     let mut readers = Vec::with_capacity(cycler.num_readers());
     for _ in 0..cycler.num_readers() {
         readers.push(RwLockCyclerReader {

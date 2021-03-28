@@ -20,6 +20,7 @@ jobs:
         features:
           - ""
           - --features unsafe_cleanup
+          - --features atomic_cycler
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -37,14 +38,16 @@ jobs:
           command: test
           args: --no-default-features ${{ matrix.features }}
 
-  test-nightly:
+  test-miri:
     name: Miri Test
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         features:
+          - ""
           - --features unsafe_cleanup
+          - --features atomic_cycler
 
     steps:
       - name: Checkout sources

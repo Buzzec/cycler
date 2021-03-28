@@ -20,9 +20,7 @@
 #![warn(missing_debug_implementations, rust_2018_idioms, missing_docs, unused_import_braces)]
 #![cfg_attr(not(feature = "allow_unsafe"), forbid(unsafe_code))]
 
-pub use traits::*;
 
-use crate::rw_lock_cycler::{RwLockCyclerReader, RwLockCyclerWriter};
 
 #[macro_use]
 mod macros;
@@ -30,6 +28,10 @@ mod macros;
 pub mod rw_lock_cycler;
 mod traits;
 
+#[cfg(feature = "atomic_cycler")]
+pub mod atomic_cycler;
+#[cfg(feature = "atomic_cycler")]
+mod atomic_rw_lock;
 #[cfg(feature = "unsafe_cleanup")]
 mod static_ref_holder;
 #[cfg(test)]
@@ -39,6 +41,10 @@ mod test;
 pub type DefaultCyclerWriter<T> = RwLockCyclerWriter<T>;
 /// This is the currently most optimal cycler reader that implements `UniversalCyclerReader`.
 pub type DefaultCyclerReader<T> = RwLockCyclerReader<T>;
+
+pub use traits::*;
+
+use crate::rw_lock_cycler::{RwLockCyclerReader, RwLockCyclerWriter};
 
 /// Creates a single reader DefaultCycler using default initial values for the slots.
 pub fn build_single_reader_default<T>() -> (DefaultCyclerWriter<T>, DefaultCyclerReader<T>)

@@ -1,38 +1,39 @@
-//! The `RwLockCycler` uses `parking_lot::RwLock` to keep track of reading and writing to each block without using unsafe code.
-//! This is the first implementation but may not be the fastest as locks are required for each switch.
-//! Due to the way the data structure is designed there is always an available slot so all lock obtainment are use the try variant.
+//! The `AtomicCycler` uses a custom atomic read/write lockless lock to keep track of reading and writing to each block without using unsafe code.
+//! This implementation is faster than `RwLockCycler` but it relies on a custom lock that is filled with unsafe code.
 
 mod builder;
 mod reader;
 mod writer;
 
 pub use builder::{build_multiple_reader, build_single_reader};
-pub use reader::RwLockCyclerReader;
-pub use writer::RwLockCyclerWriter;
+pub use reader::AtomicCyclerReader;
+pub use writer::AtomicCyclerWriter;
 
-use crate::traits::{EnsureSend, EnsureSync};
-use parking_lot::RwLock;
 use std::sync::atomic::AtomicU8;
+use crate::{EnsureSend, EnsureSync};
+use crate::atomic_rw_lock::AtomicRwLock;
+use std::sync::Arc;
 
 #[derive(Debug)]
-struct RwLockCycler<T> {
-    data_slots: Box<[RwLock<T>]>,
+struct AtomicCycler<T> {
+    data_slots: Box<[Arc<AtomicRwLock<T, AtomicU8>>]>,
     most_up_to_date: AtomicU8,
 }
-impl<T> RwLockCycler<T> {
-    fn num_readers(&self) -> usize {
+impl<T> AtomicCycler<T> {
+    const fn num_readers(&self) -> usize {
         self.data_slots.len() - 2
     }
 }
-impl<T> EnsureSend for RwLockCycler<T> where T: Send {}
-impl<T> EnsureSync for RwLockCycler<T> where T: Send + Sync {}
+impl<T> EnsureSend for AtomicCycler<T> where T: Send {}
+impl<T> EnsureSync for AtomicCycler<T> where T: Send + Sync {}
 
 #[cfg(test)]
 mod test {
-    use crate::rw_lock_cycler::build_single_reader;
+    use crate::atomic_cycler::build_single_reader;
     use crate::test::TestData;
-    use crate::traits::{CyclerReader, CyclerWriterDefault, ReadAccess, WriteAccess};
     use std::sync::atomic::Ordering;
+    use crate::{WriteAccess, ReadAccess, CyclerWriterDefault, CyclerReader};
+
     #[test]
     fn default_test() {
         let (mut writer, mut reader) =
