@@ -45,7 +45,6 @@ jobs:
     strategy:
       matrix:
         features:
-          - ""
           - --features unsafe_cleanup
           - --features atomic_cycler
 
