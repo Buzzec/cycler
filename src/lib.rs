@@ -18,7 +18,7 @@
 //! This also is based on the `clone_from` idea to clone values which is not implemented by derive normally (Derivative can auto derive for you).
 //! This is a major optimization chance in this case and you can test/track the changes to reduce copy time.
 #![warn(missing_debug_implementations, rust_2018_idioms, missing_docs, unused_import_braces)]
-#![cfg_attr(not(feature = "allow_unsafe"), deny(unsafe))]
+#![cfg_attr(not(feature = "allow_unsafe"), forbid(unsafe_code))]
 
 pub use traits::*;
 
