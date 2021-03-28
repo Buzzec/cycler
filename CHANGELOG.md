@@ -1,4 +1,8 @@
 ## cycler v0.3.0
+- Added `AtomicCycler`
+  - Activated by `atomic_cycler` feature (enabled by default)
+    - Requires `allow_unsafe` as requires unsafe code
+  - Uses a custom lockless atomic rwlock
 - Removed rust fmt linting
 - Added clippy release mode
 - Removed rustfmt.toml as it's no longer used
