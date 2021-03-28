@@ -20,6 +20,9 @@ jobs:
         features:
           - ""
           - --features unsafe_cleanup
+        mode:
+          - ""
+          - --release
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -36,4 +39,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --no-default-features ${{ matrix.features }} -- -D warnings
+          args: ${{ matrix.mode }}--no-default-features ${{ matrix.features }} -- -D warnings
