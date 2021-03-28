@@ -1,6 +1,9 @@
 ## cycler v0.2.0
 - Removed commented out code
 - Added more default build functions
+- Changed traits module to be exported out of the main module
+- Added the `allow_unsafe` feature that is required for all unsafe code
+  - Unsafe is denied if `allow_unsafe` is not enabled
 
 ## cycler v0.1.3
 - Added github actions to verify with clippy and miri
