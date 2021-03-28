@@ -23,6 +23,7 @@ jobs:
         features:
           - ""
           - --features unsafe_cleanup
+          - --features atomic_cycler
 
     steps:
       - name: Checkout sources
