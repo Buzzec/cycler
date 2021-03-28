@@ -20,6 +20,10 @@
 #![warn(missing_debug_implementations, rust_2018_idioms, missing_docs, unused_import_braces)]
 #![cfg_attr(not(feature = "allow_unsafe"), deny(unsafe))]
 
+pub use traits::*;
+
+use crate::rw_lock_cycler::{RwLockCyclerReader, RwLockCyclerWriter};
+
 #[macro_use]
 mod macros;
 
@@ -31,22 +35,26 @@ mod static_ref_holder;
 #[cfg(test)]
 mod test;
 
-pub use traits::*;
-
-use crate::rw_lock_cycler::{RwLockCyclerReader, RwLockCyclerWriter};
-
 /// This is the currently most optimal cycler writer that implements `UniversalCyclerWriter`.
 pub type DefaultCyclerWriter<T> = RwLockCyclerWriter<T>;
 /// This is the currently most optimal cycler reader that implements `UniversalCyclerReader`.
 pub type DefaultCyclerReader<T> = RwLockCyclerReader<T>;
 
 /// Creates a single reader DefaultCycler using default initial values for the slots.
-pub fn build_single_reader_default<T>() -> (DefaultCyclerWriter<T>, DefaultCyclerReader<T>) where T: Default{
+pub fn build_single_reader_default<T>() -> (DefaultCyclerWriter<T>, DefaultCyclerReader<T>)
+    where
+        T: Default,
+{
     build_single_reader([T::default(), T::default(), T::default()])
 }
 
 /// Creates a single reader DefaultCycler cloning `initial_value` as the initial values for the slots.
-pub fn build_single_reader_cloned<T>(initial_value: T) -> (DefaultCyclerWriter<T>, DefaultCyclerReader<T>) where T: Clone{
+pub fn build_single_reader_cloned<T>(
+    initial_value: T,
+) -> (DefaultCyclerWriter<T>, DefaultCyclerReader<T>)
+    where
+        T: Clone,
+{
     build_single_reader([initial_value.clone(), initial_value.clone(), initial_value])
 }
 
@@ -58,12 +66,23 @@ pub fn build_single_reader<T>(
 }
 
 /// Creates a multi reader DefaultCycler with the initial value being default.
-pub fn build_multiple_reader_default<T>(num_readers: u8) -> (DefaultCyclerWriter<T>, Vec<DefaultCyclerReader<T>>) where T: Default{
-    build_multiple_reader((0..num_readers + 2).map(|_|T::default()).collect())
+pub fn build_multiple_reader_default<T>(
+    num_readers: u8,
+) -> (DefaultCyclerWriter<T>, Vec<DefaultCyclerReader<T>>)
+    where
+        T: Default,
+{
+    build_multiple_reader((0..num_readers + 2).map(|_| T::default()).collect())
 }
 
 /// Creates a multi reader DefaultCycler with the initial value being cloned.
-pub fn build_multiple_reader_cloned<T>(initial_value: T, num_readers: u8) -> (DefaultCyclerWriter<T>, Vec<DefaultCyclerReader<T>>) where T: Clone{
+pub fn build_multiple_reader_cloned<T>(
+    initial_value: T,
+    num_readers: u8,
+) -> (DefaultCyclerWriter<T>, Vec<DefaultCyclerReader<T>>)
+    where
+        T: Clone,
+{
     build_multiple_reader(vec![initial_value; num_readers as usize + 2])
 }
 
